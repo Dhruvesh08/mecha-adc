@@ -19,17 +19,17 @@ impl Adc {
         })
     }
 
-    pub fn read_voltage0(&mut self) -> Result<u16> {
+    pub fn read_voltage0(&mut self) -> Result<u32> {
         let mut buffer = String::new();
         self.voltage0_file.read_to_string(&mut buffer)?;
         print!("{}", buffer);
-        Ok(buffer.trim().parse::<u16>().unwrap())
+        Ok(buffer.trim().parse::<u32>().unwrap())
     }
 
-    pub fn read_voltage1(&mut self) -> Result<u16> {
+    pub fn read_voltage1(&mut self) -> Result<u32> {
         let mut buffer = String::new();
         self.voltage1_file.read_to_string(&mut buffer)?;
-        Ok(buffer.trim().parse::<u16>().unwrap())
+        Ok(buffer.trim().parse::<u32>().unwrap())
     }
 
     pub fn read_sampling_frequency(&mut self) -> Result<u32> {

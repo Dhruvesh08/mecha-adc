@@ -8,10 +8,10 @@ inherit cargo
 # how to get mecha-adc could be as easy as but default to a git checkout:
 # SRC_URI += "crate://crates.io/mecha-adc/0.1.0"
 SRC_URI += "git://github.com/Dhruvesh08/mecha-adc.git;protocol=https;nobranch=1;branch=mecha-adc-v1"
-SRCREV = "d0b95505554067e7c22b22e383cc59f13017de36"
+SRCREV = "c7346bb7421394cb82fed78a8f4ac68cfb03300b"
 S = "${WORKDIR}/git"
 CARGO_SRC_DIR = ""
-PV:append = ".AUTOINC+d0b9550555"
+PV:append = ".AUTOINC+c7346bb742"
 
 # please note if you have entries that do not begin with crate://
 # you must change them to how that package can be fetched
