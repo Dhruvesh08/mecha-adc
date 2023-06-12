@@ -10,8 +10,8 @@ fn main() -> Result<()> {
     println!("Voltage 1: {}", voltage1);
     let sampling_frequency = adc.read_sampling_frequency()?;
     println!("Sampling Frequency: {}", sampling_frequency);
-    adc.set_sampling_frequency(1000)?;
-    println!("Sampling frequency set to 1000");
-    println!("updated Sampling Frequency: {}", adc.read_sampling_frequency()?);
+    // adc.set_sampling_frequency(1000)?;
+    // println!("Sampling frequency set to 1000");
+    // println!("updated Sampling Frequency: {}", adc.read_sampling_frequency()?);
     Ok(())
 }
