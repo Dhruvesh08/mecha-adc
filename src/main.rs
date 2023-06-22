@@ -6,8 +6,8 @@ fn main() {
         channel_1_path: "/sys/bus/iio/devices/iio:device0/in_voltage0_raw",
         channel_2_path: "/sys/bus/iio/devices/iio:device0/in_voltage1_raw",
     };
-    let channel1 = adc.read_channel1();
-    let channel2 = adc.read_channel2();
+    let channel1 = adc.read_channel_1();
+    let channel2 = adc.read_channel_2();
     println!("Channel 1: {:?}", channel1);
     println!("Channel 2: {:?}", channel2);
 
@@ -15,8 +15,8 @@ fn main() {
     std::thread::sleep(std::time::Duration::from_secs(5));
 
     //read again
-    let channel1 = adc.read_channel1();
-    let channel2 = adc.read_channel2();
+    let channel1 = adc.read_channel_1();
+    let channel2 = adc.read_channel_2();
     println!("Channel 1: {:?}", channel1);
     println!("Channel 2: {:?}", channel2);
 }
