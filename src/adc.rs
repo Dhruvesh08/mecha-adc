@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io::{Read, Result, BufReader};
+use std::io::{Read, Result, BufReader, Write};
 
 pub trait AdcDevice<'a> {
     fn set_device(&mut self, channel_1_path: &'a str, channel_2_path: &'a str) -> Result<()>;
@@ -40,7 +40,8 @@ impl<'a> AdcDevice<'a> for Adc<'a> {
     }
 
     fn set_sampling_frequency(&mut self, sampling_frequency: &'a str) -> Result<()> {
-        self.sampling_frequency = sampling_frequency;
+        let mut file = File::create(self.sampling_frequency)?;
+        file.write_all(sampling_frequency.as_bytes())?;
         Ok(())
     }
 
