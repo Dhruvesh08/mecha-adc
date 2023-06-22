@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io::{Read, Result};
+use std::io::{Read, Result, BufReader};
 
 pub trait AdcDevice<'a> {
     fn set_device(&mut self, channel_1_path: &'a str, channel_2_path: &'a str) -> Result<()>;
@@ -7,7 +7,7 @@ pub trait AdcDevice<'a> {
     fn read_channel_1(&mut self) -> Result<i16>;
     fn read_channel_2(&mut self) -> Result<i16>;
     fn set_sampling_frequency(&mut self, sampling_frequency: &'a str) -> Result<()>;
-    fn get_sampling_frequency(&self) -> Option<&str>;
+    fn get_sampling_frequency(&self) -> Option<String>;
 }
 
 pub struct Adc<'a> {
@@ -44,7 +44,11 @@ impl<'a> AdcDevice<'a> for Adc<'a> {
         Ok(())
     }
 
-    fn get_sampling_frequency(&self) -> Option<&str> {
-        Some(self.sampling_frequency)
+    fn get_sampling_frequency(&self) -> Option<String> {
+        let mut buf_reader = BufReader::new(File::open(self.sampling_frequency).ok()?);
+        let mut contents = String::new();
+        buf_reader.read_to_string(&mut contents).ok()?;
+        Some(contents)
     }
 }
+
