@@ -6,11 +6,14 @@ pub trait AdcDevice<'a> {
     fn get_device(&self) -> Option<(&str, &str)>;
     fn read_channel_1(&mut self) -> Result<i16>;
     fn read_channel_2(&mut self) -> Result<i16>;
+    fn set_sampling_frequency(&mut self, sampling_frequency: &'a str) -> Result<()>;
+    fn get_sampling_frequency(&self) -> Option<&str>;
 }
 
 pub struct Adc<'a> {
     pub channel_1_path: &'a str,
     pub channel_2_path: &'a str,
+    pub sampling_frequency: &'a str,
 }
 
 impl<'a> AdcDevice<'a> for Adc<'a> {
@@ -35,6 +38,13 @@ impl<'a> AdcDevice<'a> for Adc<'a> {
         File::open(self.channel_2_path)?.read_to_string(&mut buffer)?;
         Ok(buffer.trim().parse::<i16>().unwrap())
     }
+
+    fn set_sampling_frequency(&mut self, sampling_frequency: &'a str) -> Result<()> {
+        self.sampling_frequency = sampling_frequency;
+        Ok(())
+    }
+
+    fn get_sampling_frequency(&self) -> Option<&str> {
+        Some(self.sampling_frequency)
+    }
 }
-
-
